@@ -1,36 +1,42 @@
+const path = require("path");
+const HTMLWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-const path = require("path")
-const MiniCssExtractPlugin=require("mini-css-extract-plugin")
-const HtmlWebpackPlugin=require("html-webpack-plugin")
-module.exports={
-    entry:"./src/index.tsx",
-    output:{
-        path: path.resolve(__dirname,"build"),
-        filename:"bunble.js"
+module.exports = {
+
+    entry: "./src/index.tsx",
+    output: {
+        path: path.resolve(__dirname, "build"),
+        filename: "bundle.js"
     },
-    resolve:{
-        extensions:[".ts",".tsx",".jsx",".json","js"]
+    resolve: {
+        // Add ".ts" and ".tsx" as resolvable extensions.
+        extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
     },
-    module:{
-        rules:[
+    module: {
+        rules: [
             {
-                test:/\.tsx?$/,
-                loader:"awesome-typescript-loader"
+                test: /\.tsx?$/,
+                loader: "awesome-typescript-loader"
             },
-            {enforce:"pre",test:/\.js$/,loader:"source-map-loader"},
+            // All output ".js" files will have any sourcemaps re-processed by "source-map-loader".
+            { enforce: "pre", test: /\.js$/, loader: "source-map-loader" },
             {
-                test:/\.scss$/,
-                use:[
+                test: /\.scss$/,
+                use: [
                     MiniCssExtractPlugin.loader,
-                    "css-loader","sass-loader"
+                    "css-loader",
+                    "sass-loader"
                 ]
             }
         ]
-    },plugin:[
-        new HtmlWebpackPlugin({
-            template:"src/index.html"
+    },
+    plugins: [
+        new HTMLWebpackPlugin({
+            template: "src/index.html"
         }),
-        new MiniCssExtractPlugin("styles.css")
+        new MiniCssExtractPlugin("style.css")
     ],
-    devtool:"source-map"
-}
+    // Enable sourcemaps for debugging webpack"s output.
+    devtool: "source-map",
+};
