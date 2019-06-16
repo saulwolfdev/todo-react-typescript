@@ -1,8 +1,9 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import "./styles/main.scss"
-
+import {App} from "./components/App"
 
 const app = document.getElementById('app');
 
-ReactDOM.render(<h1>holaaº</h1>, app);
+ReactDOM.render(<App title="TYPES"/>, app);
+
