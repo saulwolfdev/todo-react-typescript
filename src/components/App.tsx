@@ -8,10 +8,10 @@ export class App extends React.Component<IProps, IState>{
             tasks:[]
         }
     }
-    addANewTask(task:Itask):void{
+addANewTask(task:Itask){
         this.setState({
             tasks:[...this.state.tasks, task]
-        })
+        },()=>console.log(this.state))
     }
     render(){
         return(
@@ -19,7 +19,7 @@ export class App extends React.Component<IProps, IState>{
             <h1 className="contaniner">
                         {this.props.title}
             </h1>
-              <TaskForm AddANewTask={this.addANewTask}/>
+              <TaskForm addANewTask={this.addANewTask.bind(this)}/>
             </div>
         )
     }

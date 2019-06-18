@@ -1,6 +1,6 @@
 import * as React from "react";
 import {Itask} from "./Task"
-class TaskForm extends React.Component<ITaskFormProps,ITaskFormState>{
+class TaskForm extends React.Component<ITaskFormProps,any>{
      constructor(props:ITaskFormProps){
          super(props)
          this.state={
@@ -8,33 +8,50 @@ class TaskForm extends React.Component<ITaskFormProps,ITaskFormState>{
              description:""
          }
      }
-    handleNewTask(e: React.FormEvent<HTMLFormElement>) {
+
+getCurrenTimesTamp():number{
+    //primera opccion
+    //return new Date().getTime()
+    //segunda opcion
+    const date:Date=new Date()
+    return date.getTime()
+}
+handleNewTask(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        //this.props.addANewTask()
         const newTask:Itask={
-            id:1,
-            title:"",
-            description:"",
+            id:this.getCurrenTimesTamp(),
+            title:this.state.title,
+            description:this.state.description,
             completed:false
         }
-        console.log("guardando")
+         this.props.addANewTask(newTask)
+        console.log(newTask)
     }
-handleInputChange(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
+handleInputChange(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
     e.preventDefault()
-    console.log(e.target)
-
+    const {value,name}=e.target
+    this.setState({
+        [name]:value
+    })
 }
     render() {
         return (
             <div className="form">
                 <form onSubmit={(e) => this.handleNewTask(e)} className="form-data">
-                    <input type="text" 
-                    onChange={e=>this.handleInputChange(e)}
-                    name="" id="" className="input" placeholder="ingrese" />
-                    <textarea className="text-area"
-                    onChange={e=>this.handleInputChange(e)}
-                    placeholder="texto"></textarea>
-                    <button type="submit" className="button">Enviar</button>
+                    <input 
+                        type="text"
+                        name="description" 
+                        onChange={e=>this.handleInputChange(e)}
+                        className="input" 
+                        placeholder="ingrese" />
+                    <textarea 
+                        className="text-area"
+                        name="title"
+                        onChange={e=>this.handleInputChange(e)}
+                        placeholder="texto"></textarea>
+                    <button 
+                        type="submit" 
+                        className="button">Enviar</button>
                 </form>
             </div>
         )
@@ -43,8 +60,8 @@ handleInputChange(e:React.ChangeEvent<HTMLInputElement|HTMLTextAreaElement>){
 interface ITaskFormProps{
     addANewTask:(task:Itask)=> void;
 }
-interface ITaskFormState{
-    title:string
-    description:string
-}
+// interface ITaskFormState{
+//     title:string;
+//     description:string;
+// }
 export default TaskForm
