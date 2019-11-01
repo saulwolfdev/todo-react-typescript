@@ -1,6 +1,6 @@
 import * as React from "react";
-import TaskForm from "./TaskForm"
-import {Itask} from "./Task"
+import TaskForm from "./TaskForm";
+import {Itask} from "./Task";
 export class App extends React.Component<IProps, IState>{
     constructor(props:IProps){
         super(props); 

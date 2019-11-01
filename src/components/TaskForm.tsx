@@ -16,7 +16,7 @@ getCurrenTimesTamp():number{
     const date:Date=new Date()
     return date.getTime()
 }
-handleNewTask(e: React.FormEvent<HTMLFormElement>) {
+handleNewTask(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const newTask:Itask={
             id:this.getCurrenTimesTamp(),
