@@ -1,5 +1,5 @@
 import * as React from "react";
-import {Itask} from "./Task"
+import {Itask} from "./Task";
 class TaskForm extends React.Component<ITaskFormProps,any>{
      constructor(props:ITaskFormProps){
          super(props)
@@ -60,8 +60,8 @@ handleInputChange(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
 interface ITaskFormProps{
     addANewTask:(task:Itask)=> void;
 }
-// interface ITaskFormState{
-//     title:string;
-//     description:string;
-// }
+interface ITaskFormState{
+    title:string;
+    description:string;
+}
 export default TaskForm
