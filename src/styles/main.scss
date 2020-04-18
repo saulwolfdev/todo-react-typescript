@@ -1,9 +1,9 @@
-.banner{
-color: darkblue
-    &__saul{
-        background:  red;
+.banner {
+    color: darkblue &__saul {
+        background: red;
     }
 }
-body{
+
+body {
     background-color: aqua;
 }

@@ -25,6 +25,7 @@ handleNewTask(e: React.FormEvent<HTMLFormElement>) {
             completed:false
         }
          this.props.addANewTask(newTask)
+         this.setState({title:"",description:""})
         console.log(newTask)
     }
 handleInputChange(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
@@ -40,15 +41,19 @@ handleInputChange(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
                 <form onSubmit={(e) => this.handleNewTask(e)} className="form-data">
                     <input 
                         type="text"
-                        name="description" 
+                        name="title" 
                         onChange={e=>this.handleInputChange(e)}
                         className="input" 
-                        placeholder="ingrese" />
+                        placeholder="ingrese"
+                        value={this.state.title}
+                        />
                     <textarea 
                         className="text-area"
-                        name="title"
+                        name="description"
                         onChange={e=>this.handleInputChange(e)}
-                        placeholder="texto"></textarea>
+                        placeholder="texto"
+                        value={this.state.description}
+                        ></textarea>
                     <button 
                         type="submit" 
                         className="button">Enviar</button>
