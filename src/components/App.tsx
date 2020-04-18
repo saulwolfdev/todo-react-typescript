@@ -1,7 +1,7 @@
 import * as React from "react";
 import TaskForm from "./TaskForm";
-import TaskList from "./TaskList"
 import {Itask} from "./Task";
+import TaskList from "./TaskList";
 export class App extends React.Component<IProps, IState>{
     constructor(props:IProps){
         super(props); 
@@ -15,17 +15,13 @@ addANewTask(task:Itask){
             tasks:[...this.state.tasks, task]
         },()=>console.log(this.state))
     }
-deleteATask(id:number){
-    const tasks:Itask[]=this.state.tasks.filter(
-        (task:Itask)=>task.id!==id
-    )
-    //es lo mismo
-    //this.setState({tasks:tasks})
-    //otra opcion
-    this.setState({tasks:tasks})
-    console.log("this is a tasks=>",tasks)
-    console.log("this is a id =>",id)
-}
+	
+    public deleteATask(id: number): void {
+        const tasks: Itask[] = this.state.tasks.filter(
+            (task: Itask) => task.id !== id
+        );
+        this.setState({ tasks });
+    }
     render(){
         return(
             <div className="container">
@@ -33,12 +29,10 @@ deleteATask(id:number){
                         {this.props.title}
             </h1>
               <TaskForm addANewTask={this.addANewTask.bind(this)}/>
-              <div className="container">
-                  <TaskList 
-                  tasks={this.state.tasks}
-                  deleteAtask={this.deleteATask}
-                  />
-              </div>
+			  <TaskList
+                                    tasks={this.state.tasks}
+                                    deleteATask={this.deleteATask.bind(this)}
+                                />
             </div>
         )
     }

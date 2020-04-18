@@ -1,25 +1,31 @@
-import * as React from "react"
-import {Itask} from "./Task";
-class TaskList extends React.Component<any,any> {
+import * as React from 'react';
 
-    render():JSX.Element[] {
-        return this.props.tasks.map((task:Itask, i:number)=>{
-            return(
-                <div className="card" key={task.id}>
-                    <h3>{task.title}</h3>
-                    <div className="description">
-                        {task.description}
+import {Itask} from "./Task";
+
+class TaskList extends React.Component<ITaskListProps, any> {
+    render(): JSX.Element[] {
+        return this.props.tasks.map((task: Itask, i: number) => {
+            return (
+                <div className="col-md-4 mt-2" key={task.id}>
+                    <div className="card card-body text-center">
+                        <h3>{task.title}</h3>
+                        <p>{task.description}</p>
+                        <button 
+                            className="btn btn-danger btn-block"
+                            onClick={() => this.props.deleteATask(task.id)}
+                            >
+                            Delete
+                        </button>
                     </div>
-                    <button onClick={()=>this.props.deleteAtask(task.id)}>
-                        delete
-                    </button>
                 </div>
             )
-        })
+        });
     }
 }
-interface ITaskListProps{
-    tasks:Itask[]
-    deleteATask:(id:number)=>void;
+
+interface ITaskListProps {
+    tasks: Itask[];
+    deleteATask: (id: number) => any;
 }
+
 export default TaskList;

@@ -1,5 +1,13 @@
 import * as React from "react";
-import {Itask} from "./Task"
+import {Itask} from "./Task";
+
+interface ITaskFormProps{
+    addANewTask:(task:Itask)=> void;
+}
+interface ITaskFormState{
+    title:string;
+    description:string;
+}
 class TaskForm extends React.Component<ITaskFormProps,any>{
      constructor(props:ITaskFormProps){
          super(props)
@@ -16,7 +24,7 @@ getCurrenTimesTamp():number{
     const date:Date=new Date()
     return date.getTime()
 }
-handleNewTask(e: React.FormEvent<HTMLFormElement>) {
+handleNewTask(e:React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const newTask:Itask={
             id:this.getCurrenTimesTamp(),
@@ -62,11 +70,5 @@ handleInputChange(e:React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>){
         )
     }
 }
-interface ITaskFormProps{
-    addANewTask:(task:Itask)=> void;
-}
-// interface ITaskFormState{
-//     title:string;
-//     description:string;
-// }
+
 export default TaskForm
